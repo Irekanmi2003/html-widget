@@ -202,19 +202,6 @@
             return template;
         }
 
-//        evaluateCondition(condition, params) {
-//            condition = condition.replace(/(\w+)/g, (match, key) =>
-//            Object.prototype.hasOwnProperty.call(params, key) ? `params["${key}"]` : match
-//            );
-//
-//            try {
-//                return new Function('params', `return ${condition};`)(params);
-//            } catch (error) {
-//                console.error("Error evaluating condition:", error);
-//                return false;
-//            }
-//        }
-
         evaluateCondition(condition, params, context = params) {
             // Replace keys with their resolved values from the current context (nested handling)
             condition = condition.replace(/(\w+\[\d*\]|\w+)/g, (match, key) => {

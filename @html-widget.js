@@ -202,18 +202,43 @@
             return template;
         }
 
-        evaluateCondition(condition, params) {
-            condition = condition.replace(/(\w+)/g, (match, key) =>
-            Object.prototype.hasOwnProperty.call(params, key) ? `params["${key}"]` : match
-            );
+//        evaluateCondition(condition, params) {
+//            condition = condition.replace(/(\w+)/g, (match, key) =>
+//            Object.prototype.hasOwnProperty.call(params, key) ? `params["${key}"]` : match
+//            );
+//
+//            try {
+//                return new Function('params', `return ${condition};`)(params);
+//            } catch (error) {
+//                console.error("Error evaluating condition:", error);
+//                return false;
+//            }
+//        }
+
+        evaluateCondition(condition, params, context = params) {
+            // Replace keys with their resolved values from the current context (nested handling)
+            condition = condition.replace(/(\w+\[\d*\]|\w+)/g, (match, key) => {
+                let contextToCheck = context;  // Start from the current context
+
+                // If the key is an array access (e.g., data[0]), resolve it accordingly
+                if (key.includes('[')) {
+                    return `context.${key}`;
+                }
+                // Otherwise, resolve simple keys from the current context
+                else {
+                    return `context.${key}`;
+                }
+            });
 
             try {
-                return new Function('params', `return ${condition};`)(params);
+                // Use Function constructor to evaluate the condition in the current scope
+                return new Function('context', `with (context) { return ${condition}; }`)(context);
             } catch (error) {
                 console.error("Error evaluating condition:", error);
                 return false;
             }
         }
+
 
         escapeHtml(value) {
             if (typeof value !== 'string') return value;

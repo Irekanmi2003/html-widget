@@ -1,6 +1,6 @@
 {
   "name": "html-widget",
-  "version": "1.7.1",
+  "version": "4.0.0",
   "description": "A light weight template framework engine for CRU(Client Render Use)",
   "main": "@html-widget.js",
   "exports": {
@@ -9,7 +9,7 @@
   },
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "html",
@@ -18,5 +18,13 @@
     "widget"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "devDependencies": {
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^25.0.1"
+  }
 }

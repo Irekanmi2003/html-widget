@@ -1,7 +1,7 @@
 {
   "name": "html-widget",
-  "version": "4.0.0",
-  "description": "A light weight template framework engine for CRU(Client Render Use)",
+  "version": "7.0.0",
+  "description": "A light weight templating framework engine for CRU(Client Render Use)",
   "main": "@html-widget.js",
   "exports": {
     "require": "./@html-widget.js",
